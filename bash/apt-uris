@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# ----------------------------------------------------------------------------
+#     Name: apt-uris
+#     Desc: Print apt-get deb file uris  
+#    Usage: apt-uris install|upgrade|dist-upgrade package_names
+#  Example: apt-uris install firefox gimp
+#           apt-uris upgrade
+#           apt-uris dist-upgrade
+# ----------------------------------------------------------------------------
+
+if [ $# -eq 0 ]; then
+    echo "apt-uris install|upgrade|dist-upgrade package_name." 1>&2
+    exit 1
+fi
+
+apt-get -y --print-uris $@ | grep -E -o "http://[^\']+"
